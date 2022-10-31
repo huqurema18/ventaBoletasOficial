@@ -27,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
         txtDocumento = findViewById(R.id.txtNumDocumento);
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
         
-        consultarUsuario();
+
 
         //Iniciar sesión
         btnIniciarSesion.setOnClickListener(v->{
+
             //Consulta existencia del documento en la BD, si existe procede a la venta, cuando no exista, debe registrarse
             try{
-                if(autenticarUsuario()){
+                if(consultarUsuario()){
                     //El usuario existe, debe enviarse el documento como parámetro al Intent de ventas
                     Toast.makeText(this, "Bienvenid@", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, VentaBoletas.class);
@@ -55,29 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void consultarUsuario() {
-        try {
-            //conexión
-            DbHelper dbHelper = new DbHelper(this);
-            //objeto para la lectura en la base de datos
-            SQLiteDatabase base_datos = dbHelper.getReadableDatabase();
-            //Arreglo con las condiciones de búsqueda, WHERE
-            /* String[] parametrosConsulta = {WEmail.getText().toString()};
-            //Arreglo con los camps a consultar, SELECT
-            String[] camposConsulta = {"NOMBRE"};
-            //Se define cursor para almacenar el resultado de la búsqueda
-            Cursor cursor = base_datos.query(Constantes.TABLA_USUARIO, camposConsulta, "EMAIL" + "=?",
-                    parametrosConsulta, null, null, null);
-            cursor.moveToFirst();
-            Toast.makeText(this, "Bienvenido " + cursor.getString(0), Toast.LENGTH_SHORT).show();
-
-            cursor.close();
-        } catch (Exception e) {
-            Toast.makeText(this, "Error al consultar Usuario", Toast.LENGTH_SHORT).show();
-            WEmail.setText("");
-        }*/
-    }catch (Exception e){}
-    }
 
     private boolean autenticarUsuario(){
         //Construir código para validar usuario y retornar
@@ -88,27 +66,30 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void consultarUsuario() {
+    private boolean consultarUsuario() {
+        boolean quest=false;
         try {
             //conexión
             DbHelper dbHelper = new DbHelper(this);
             //objeto para la lectura en la base de datos
             SQLiteDatabase base_datos = dbHelper.getReadableDatabase();
             //Arreglo con las condiciones de búsqueda, WHERE
-            String[] parametrosConsulta = {WEmail.getText().toString()};
+            String[] parametrosConsulta = {txtDocumento.getText().toString()};
             //Arreglo con los camps a consultar, SELECT
-            String[] camposConsulta = {"NOMBRE"};
+            String[] camposConsulta = {"DOCUMENTO"};
             //Se define cursor para almacenar el resultado de la búsqueda
-            Cursor cursor = base_datos.query(constantes.TABLA_USUARIOS, camposConsulta, "EMAIL" + "=?",
+            Cursor cursor = base_datos.query(constantes.TABLA_USUARIOS, camposConsulta, "NOMBRE" + "=?",
                     parametrosConsulta, null, null, null);
             cursor.moveToFirst();
             Toast.makeText(this, "Bienvenido " + cursor.getString(0), Toast.LENGTH_SHORT).show();
 
             cursor.close();
+            quest=true;
         } catch (Exception e) {
             Toast.makeText(this, "Error al consultar Usuario", Toast.LENGTH_SHORT).show();
-            WEmail.setText("");
+            txtDocumento.setText("");
         }
+        return quest;
     }
 
     private void actualizarNombreUsuario() {
@@ -129,6 +110,30 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Toast.makeText(this, "Error al actualizar usuario", Toast.LENGTH_SHORT).show();
 
+        }
+    }
+
+    private void registrarusuarioBD() {
+        try {
+            //Conexion a la BD
+            DbHelper dbHelper=new DbHelper(this);
+            //Objeto para la interaccion con la BD
+            SQLiteDatabase datos =dbHelper.getWritableDatabase();
+            //permite hacer insercion al combinar clave-valor
+            ContentValues values=new ContentValues();
+            values.put("NOMBRE", txNombre.getText().toString());
+            values.put("EMAIL", txEmail.getText().toString());
+
+            //Inserta el registro y retorna el ID
+            long id=datos.insert(constantes.TABLA_USUARIOS,null, values);
+
+            if(id>0){
+                Toast.makeText(this, "USUARIO CREADO", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "ERROR AL CREAR EL USUARIO", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(this, "NO FUE POSIBLE REGISTRAR LA INFORMACIÓN", Toast.LENGTH_SHORT).show();
         }
     }
 
