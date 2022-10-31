@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">VentaBoletas</string>
+    <string name="tituloInicioSesion">Iniciar Sesión</string>
+    <string name="tituloRegistro">Registro de usuarios</string>
+    <string name="tituloVenta">Ventas</string>
+    <string name="nombre">Nombre</string>
+    <string name="telefono">Teléfono</string>
+    <string name="documento">Documento</string>
+    <string name="numAsientos">Número de puestos</string>
+    <string name="IniciarSesion">Iniciar Sesión</string>
+    <string name="registrar">Registrar</string>
+    <string name="comprar">Comprar</string>
+    <string name="regresar">Regresar</string>
+
+</resources>
