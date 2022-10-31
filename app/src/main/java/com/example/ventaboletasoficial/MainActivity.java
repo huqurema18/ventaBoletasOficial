@@ -55,27 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void consultarUsuario() {
+    private void consultarVentas() {
         try {
             //conexión
             DbHelper dbHelper = new DbHelper(this);
             //objeto para la lectura en la base de datos
             SQLiteDatabase base_datos = dbHelper.getReadableDatabase();
-            //Arreglo con las condiciones de búsqueda, WHERE
-            /* String[] parametrosConsulta = {WEmail.getText().toString()};
-            //Arreglo con los camps a consultar, SELECT
-            String[] camposConsulta = {"NOMBRE"};
-            //Se define cursor para almacenar el resultado de la búsqueda
-            Cursor cursor = base_datos.query(Constantes.TABLA_USUARIO, camposConsulta, "EMAIL" + "=?",
-                    parametrosConsulta, null, null, null);
-            cursor.moveToFirst();
-            Toast.makeText(this, "Bienvenido " + cursor.getString(0), Toast.LENGTH_SHORT).show();
 
-            cursor.close();
-        } catch (Exception e) {
-            Toast.makeText(this, "Error al consultar Usuario", Toast.LENGTH_SHORT).show();
-            WEmail.setText("");
-        }*/
     }catch (Exception e){}
     }
 
