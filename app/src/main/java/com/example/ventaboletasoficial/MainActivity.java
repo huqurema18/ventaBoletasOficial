@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     //El usuario existe, debe enviarse el documento como parámetro al Intent de ventas
                     Toast.makeText(this, "Bienvenid@", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, VentaBoletas.class);
-                    intent.putExtra("documento",txtDocumento.getText());
+                    intent.putExtra("documento",txtDocumento.getText().toString());
                     startActivity(intent);
                 }
                 else {
@@ -91,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
             //Arreglo con los camps a consultar, SELECT
             String[] camposConsulta = {"DOCUMENTO"};
             //Se define cursor para almacenar el resultado de la búsqueda
-            Cursor cursor = base_datos.query(constantes.TABLA_USUARIOS, camposConsulta, "NOMBRE" + "=?",
+            Cursor cursor = base_datos.query(constantes.TABLA_USUARIOS, camposConsulta, "DOCUMENTO" + "=?",
                     parametrosConsulta, null, null, null);
             cursor.moveToFirst();
             Toast.makeText(this, "Bienvenido " + cursor.getString(0), Toast.LENGTH_SHORT).show();
-
-            cursor.close();
             quest=true;
+            cursor.close();
+
         } catch (Exception e) {
             Toast.makeText(this, "Error al consultar Usuario", Toast.LENGTH_SHORT).show();
             txtDocumento.setText("");

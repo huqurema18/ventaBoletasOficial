@@ -55,6 +55,7 @@ public class VentaBoletas extends AppCompatActivity {
 
 
     private Boolean registrarVentaBD() {
+        Bundle datoss=getIntent().getExtras();
         Boolean query = false;
         try {
             //Conexion a la BD
@@ -63,8 +64,9 @@ public class VentaBoletas extends AppCompatActivity {
             SQLiteDatabase datos =dbHelper.getWritableDatabase();
             //permite hacer insercion al combinar clave-valor
             ContentValues values=new ContentValues();
+
             values.put("ASIENTOS", txtNumAsientos.getText().toString());
-            values.put("DOCUMENTOusu", txtNumAsientos.getText().toString());
+            values.put("DOCUMENTOusu",datoss.getString("documento") );
             values.put("TOTAL", txtNumAsientos.getText().toString());
 
             //Inserta el registro y retorna el ID
