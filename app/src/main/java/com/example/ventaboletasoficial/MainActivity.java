@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else {
+
                     //No existe, debe crear el registro, luego del registro, podrá comprar
+
                     Toast.makeText(this, "Usuario inexistente, por favor, registre sus datos", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(this, RegistrarUsuario.class);
                     intent.putExtra("documento",txtDocumento.getText());
@@ -56,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-<<<<<<< HEAD
-=======
+
     private void consultarVentas() {
         try {
             //conexión
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     }catch (Exception e){}
     }
->>>>>>> 9b7bdf49f3fd139625529365361c0a19df0d0726
+
 
     private boolean autenticarUsuario(){
         //Construir código para validar usuario y retornar
@@ -125,29 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void registrarusuarioBD() {
-        try {
-            //Conexion a la BD
-            DbHelper dbHelper=new DbHelper(this);
-            //Objeto para la interaccion con la BD
-            SQLiteDatabase datos =dbHelper.getWritableDatabase();
-            //permite hacer insercion al combinar clave-valor
-            ContentValues values=new ContentValues();
-            values.put("NOMBRE", txNombre.getText().toString());
-            values.put("EMAIL", txEmail.getText().toString());
 
-            //Inserta el registro y retorna el ID
-            long id=datos.insert(constantes.TABLA_USUARIOS,null, values);
-
-            if(id>0){
-                Toast.makeText(this, "USUARIO CREADO", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(this, "ERROR AL CREAR EL USUARIO", Toast.LENGTH_SHORT).show();
-            }
-        }catch (Exception e){
-            Toast.makeText(this, "NO FUE POSIBLE REGISTRAR LA INFORMACIÓN", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void eliminarUsuario() {
         try {

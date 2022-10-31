@@ -68,8 +68,8 @@ public class VentaBoletas extends AppCompatActivity {
             SQLiteDatabase datos =dbHelper.getWritableDatabase();
             //permite hacer insercion al combinar clave-valor
             ContentValues values=new ContentValues();
-            values.put("NOMBRE", txNombre.getText().toString());
-            values.put("EMAIL", txEmail.getText().toString());
+            //values.put("NOMBRE", txNombre.getText().toString());
+            //values.put("EMAIL", txEmail.getText().toString());
 
             //Inserta el registro y retorna el ID
             long id=datos.insert(constantes.TABLA_USUARIOS,null, values);
