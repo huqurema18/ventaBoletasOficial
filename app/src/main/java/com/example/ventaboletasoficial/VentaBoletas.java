@@ -32,11 +32,26 @@ public class VentaBoletas extends AppCompatActivity {
         btnComprar.setOnClickListener(v->{
             try{
                 //Registra la venta al usuario
-
+                if(insertarVenta()){
+                    //Confirma y envía a la actividad de reserva
+                    Toast.makeText(this, "Registro de venta creado correctamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, VentaBoletas.class);
+                    intent.putExtra("documento",txtNumAsientos.getText());
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(this, "No fue posible guardar la venta, por favor intente nuevamente", Toast.LENGTH_LONG).show();
+                }
             }
             catch  (Exception e){
-                Toast.makeText(this, "Error, no fue posible registr la compra", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error, no fue posible insertar la venta", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private boolean insertarVenta(){
+        //Construir código para insertar registro y retornar
+        //True: registro insertado, false en cualquier otro caso
+
+        return true;
     }
 }

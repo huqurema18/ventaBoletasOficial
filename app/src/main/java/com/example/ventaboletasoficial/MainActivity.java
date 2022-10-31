@@ -56,6 +56,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD
+=======
+    private void consultarVentas() {
+        try {
+            //conexión
+            DbHelper dbHelper = new DbHelper(this);
+            //objeto para la lectura en la base de datos
+            SQLiteDatabase base_datos = dbHelper.getReadableDatabase();
+
+    }catch (Exception e){}
+    }
+>>>>>>> 9b7bdf49f3fd139625529365361c0a19df0d0726
 
     private boolean autenticarUsuario(){
         //Construir código para validar usuario y retornar
