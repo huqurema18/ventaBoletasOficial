@@ -72,4 +72,6 @@ CREATE INDEX [IFK_EmployeeReportsTo] ON [Employee] ([ReportsTo]);*/
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+constantes.TABLA_USUARIOS);
         sqLiteDatabase.execSQL(CREAR_TABLA_USUARIOS);
     }
+
+
 }
